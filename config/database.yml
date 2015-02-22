@@ -14,11 +14,11 @@ test:
 
 production:
   <<: *default
-  host: <%= ENV['APP_DB_HOST'] %>
-  port: <%= ENV['APP_DB_PORT'] || "3306" %>
-  database: <%= ENV['APP_DB_DATABASE'] %>
-  username: <%= ENV['APP_DB_USERNAME'] %>
-  password: <%= ENV['APP_DB_PASSWORD'] %>
+  host: ec2-54-204-32-91.compute-1.amazonaws.com #<%= ENV['APP_DB_HOST'] %>
+  port: 5432 #<%= ENV['APP_DB_PORT'] || "3306" %>
+  database: daseg8dgl6qes4 #<%= ENV['APP_DB_DATABASE'] %>
+  username: infqkircpdrhnj #<%= ENV['APP_DB_USERNAME'] %>
+  password: xR3wTaJXx9G-9jcpg-F56aCCLL #<%= ENV['APP_DB_PASSWORD'] %>
 
 # import data to Postgresql
 # during development, use this
