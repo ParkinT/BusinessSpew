@@ -1,0 +1,67 @@
+h1, h4
+{
+  text-align: center;
+}
+
+.tweetified
+{
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  /*   */
+ font-size: 110%; 
+}
+
+label
+{
+  margin-right: 0.5em;
+}
+
+.float-right
+{
+  float: right;
+  margin-right: 1em;
+}
+
+.spew-form
+{
+  font-size: 22px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: inherit;
+  padding-right: inherit;
+}
+
+.spew-form .form-control
+{
+  height: 120%;
+  font-size: 120%;
+  font-weight: 500;
+}
+
+#spew
+{
+  font-size: 12pt;
+  font-family: sans "Arial";
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#spew .panel-heading
+{
+  text-align: center;
+  font-size: 24pt;
+  font-weight: 650;
+}
+
+footer
+{
+  text-align: center;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 20px;
+  padding-bottom: 2px;
+}

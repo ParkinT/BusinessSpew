@@ -1,0 +1,17 @@
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+<div class="panel panel-primary">
+<div class="panel-body spew-form">
+<%= form_tag 'spew' do %> 
+  <%= text_field_tag "title", nil, placeholder: 'Enter a Report Title...', class: "form-control" %><br />
+  <%= hidden_field_tag "category", "corporate" %>
+  <%= label_tag "Sentences per Paragraph" %><%= select_tag "sentences", options_for_select(1..30, 8), class: "btn-lg" %><br />
+  <%= label_tag "Paragraphs" %><%= select_tag "paragraphs", options_for_select(1..12, 3), class: "btn-lg" %><br />
+  <%= button_tag "Let's Make Some BS", class: "btn btn-lg btn-info float-right", data: { disable_with: "Generating BS..." } %>
+<% end %>
+</div>
+</div>
+</div>
+<div class="col-sm-2"></div>
+</div>

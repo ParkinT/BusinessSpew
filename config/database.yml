@@ -1,0 +1,31 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: businessspew_development
+
+test:
+  <<: *default
+  database: businessspew_test
+
+production:
+  <<: *default
+  host: <%= ENV['APP_DB_HOST'] %>
+  port: <%= ENV['APP_DB_PORT'] || "3306" %>
+  database: <%= ENV['APP_DB_DATABASE'] %>
+  username: <%= ENV['APP_DB_USERNAME'] %>
+  password: <%= ENV['APP_DB_PASSWORD'] %>
+
+# import data to Postgresql
+# during development, use this
+#   rake db:reset && psql businessspew_development < ../BusinessSpewDatabase.sql
+
+# rake db:reset
+# psql
+# \connect businessspew_development
+# \i ../BusinessSpewDatabase.sql
+
