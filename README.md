@@ -34,6 +34,12 @@ Optionally, you can include a Report Title as the last parameter.
 
 > Stop what you are doing and give me a status report on how you value strategic customized skill sets! Our strategy requires a zero-deviation precision focus, and we must harbor your defacto committees. Our solution is that we always amass median unary responsibilities!  Unilaterally, we should e-cumulate shifted outside-in action-items. Logically, we must self-direct all vertical webifications.
 
+
+#### BusinessSpew is now a Slack Bot
+Install the [BS-Bot](https://github.com/ParkinT/bs-bot) in your Slack group and have fun generating **pure BS**
+
+---
+
 ###The origins of BusinessSpew 
 
 The concept of BusinessSpew originated many years ago.  Back in the days before the Internet, I wrote a small DOS application called 'Jive'.  It was "The World's First True WORD Processor" because it would convert any text you fed it to a slang (at the time called Ebonics).
