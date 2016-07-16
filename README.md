@@ -1,5 +1,4 @@
 #Business Spew Generator
-[![BusinessSpew was developed and is maintained ‘in the cloud’ on Nitrous.IO](https://gist.githubusercontent.com/ParkinT/22e59e6b450d4694431a/raw/d2bde10f78da6fd5b438f0cb726b09f527d48bbf/NitrousCharged.png)](https://www.nitrous.io/hack_button?source=embed&runtime=rails&repo=ParkinT%2FBusinessSpew.git)
 
 The BS Generator creates blocks of valid English language sentences comprised solely of jargon, slang and nonsense. The __Symbiotic Highly-Intelligent Type__ generator has the capability to create phrases and sentences that conform properly to linguistic and grammatical rules.
 
@@ -23,7 +22,7 @@ Optionally, you can include a Report Title as the last parameter.
   bs.leveragedsynergies.com/api/4/2/Report%20Title
 ```
 
-[x] Note that the text **must be** URL encoded.
+  [ x ] Note that the text **must be** URL encoded.
 
 ###Tweet your BS The BusinessSpew Generator can provide a Twitter-friendly sentence with a call like this:
 
