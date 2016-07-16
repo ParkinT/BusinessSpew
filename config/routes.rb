@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   post '/spew', to: 'session#show'
-  get '/api/:sentences/:paragraphs/:title', to: 'api#show'  #spew json
+  get '/api(/:sentences(/:paragraphs(/:title)))', to: 'api#show', format: "json"
   get '/api', to: 'api#index'  #provide instructions
 
   root 'session#index'
@@ -60,5 +60,5 @@ Rails.application.routes.draw do
   #     # Directs /admin/products/* to Admin::ProductsController
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
-  #   end
 end
+  #   end
