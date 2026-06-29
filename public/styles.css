@@ -1,0 +1,131 @@
+/* public/styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+header h1 {
+    background: linear-gradient(45deg, #ff6b19 0%, #f72585 50%, #73c6fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 10px 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+button, input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background: #2980b9;
+}
+
+button[disabled], input[type="submit"][disabled] {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+input[type="text"], select {
+    padding: 10px;
+    font-size: 16px;
+    width: calc(100% - 22px);
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+pre {
+    background: #1e1e2f;
+    padding: 15px;
+    overflow-x: auto;
+    color: #00ffcc;
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+    border-radius: 5px;
+}
+
+code {
+    background: #2d2d3f;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #00ffcc;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+button.secondary {
+    background: #f39c12 !important;
+}
+
+button.danger {
+    background: #e74c3c !important;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background: #2c3e50;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #f472b6 0%, #73c6fc 100%);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    button, input[type="submit"] {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+

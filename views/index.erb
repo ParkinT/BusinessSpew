@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BusinessSpew - The Corporate Jargon Generator</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="4" fill="#fff" text-anchor="middle">%s</text></svg>') center/contain no-repeat;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            padding: 10px 0;
+        }
+        
+        h2 {
+            color: #ecf0f1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .api-usage {
+            background: rgba(44, 62, 80, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        pre {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            overflow-x: auto;
+            font-family: monospace;
+            color: #00ffcc;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .examples {
+            margin-top: 30px;
+        }
+        
+        .example {
+            background: rgba(52, 108, 189, 0.9);
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            color: #8899a6;
+            margin-top: 50px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BusinessSpew 🔥</h1>
+        <h2>The Corporate Jargon &amp; Business BS Generator</h2>
+        <p>Generate authentic business rhetoric, from boardroom speak to technical posturing.</p>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <h3>How It Works</h3>
+            <p>BusinessSpew combines carefully curated vocabularies with patterned sentence structures to create content that sounds like it comes from a board meeting, quarterly earnings call, or tech conference keynote.</p>
+            
+            <h3>Key Features</h3>
+            <ul style="color: #ecf0f1;">
+                <li>Multiple categories: corporate, tech, startup, AI, and more</li>
+                <li>Customizable sentence/paragraph count</li>
+                <li>Authentic business patterns &amp; structures</li>
+                <li>JSON API for programmatic access</li>
+                <li>Local testing with Rackup</li>
+            </ul>
+        </div>
+        
+        <div class="api-usage">
+            <h4>API Usage Guide</h4>
+            
+            <p><strong>Base URL:</strong> <code>http://localhost:3000/api</code></p>
+            
+            <h5>1. Basic Request</h5>
+<pre>
+GET /api/3/2/"Strategic Roadmap"
+Accept: application/json
+</pre>
+            
+            <h5>2. Full URL Structure</h5>
+<pre>
+GET /api[:sentences][:paragraphs][:title]
+</pre>
+            
+            <h5>3. Query Parameters (optional)</h5>
+            <table style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #555; padding: 8px;">Parameter</th>
+                        <th style="border: 1px solid #555; padding: 8px;">Description</th>
+                        <th style="border: 1px solid #555; padding: 8px;">Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">sentences</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Number of sentences per paragraph</td>
+                        <td style="border: 1px solid #555; padding: 6px;">1</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">paragraphs</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Number of paragraphs</td>
+                        <td style="border: 1px solid #555; padding: 6px;">1</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">title</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Document title (optional)</td>
+                        <td style="border: 1px solid #555; padding: 6px;">"Executive Summary"</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">category</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Content category (corporate, tech, startup, ai)</td>
+                        <td style="border: 1px solid #555; padding: 6px;">"corporate"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="examples">
+            <h4>Example Responses</h4>
+            
+            <div class="example">
+                <strong>Request:</strong>
+                <pre>GET /api/3/2/"Q4 Strategy Document"</pre>
+                <strong>Response:</strong>
+                <pre>
+{
+  "timestamp": "2023-11-05T15:30:00Z",
+  "request": {
+    "sentences": 3,
+    "paragraphs": 2,
+    "title": "Q4 Strategy Document"
+  },
+  "result": {
+    "title": "Q4 Strategy Document",
+    "paragraphs": [
+      "We are at DEFCON 1, so you must leverage this synergistic opportunity to optimize our value proposition.",
+      
+      "While leveraging synergy across multimedia paradigms, we need to disrupt traditional business models and transform our core ecosystem."
+    ]
+  },
+  "status": "success"
+}
+                </pre>
+            </div>
+            
+            <div class="example">
+                <strong>Request:</strong>
+                <pre>POST /spew/tech</pre>
+                <strong>Response:</strong>
+                <pre>
+{
+  "timestamp": "2023-11-05T15:31:00Z",
+  "category": "tech",
+  "sentence": "Containerizing our distributed microservices will enable horizontal scaling and improve system resilience.",
+  "full_response": {
+    "message": "Randomly generated business BS:",
+    "content": "Containerizing our distributed microservices will enable horizontal scaling and improve system resilience.",
+    "category": "tech",
+    "hashtag": "#BusinessSpew"
+  },
+  "status": "success"
+}
+                </pre>
+            </div>
+        </div>
+        
+        <div class="api-usage">
+            <h4>Postman Collection Setup</h4>
+            
+            <p>Paste this JSON into Postman to import the full collection:</p>
+            
+<pre>
+{
+  "info": {
+    "name": "BusinessSpew API",
+    "schema": "collection/v5.1.0",
+    "author": "Your Name",
+    "copyright": "2023 BusinessSpew"
+  },
+  "item": [
+    {
+      "name": "GET /api - Documentation",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api"
+      }
+    },
+    {
+      "name": "GET /api/:sentences/:paragraphs/:title - Generate Spew",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api/3/2/%22Strategic%20Roadmap%22"
+      }
+    },
+    {
+      "name": "POST /spew - Generate Single Sentence",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:3000/spew/ai"
+      }
+    }
+  ]
+}
+</pre>
+            
+            <p class="note">Don't forget to set the <code>Accept: application/json</code> header for all requests!</p>
+        </div>
+        
+        <div class="container">
+            <h4>Vocabulary Categories Explained</h4>
+            
+            <table style="width:100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #555; padding: 8px;">Category</th>
+                        <th style="border: 1px solid #555; padding: 8px;">Use Case</th>
+                        <th style="border: 1px solid #555; padding: 8px;">Tone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">corporate</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Board meetings, annual reports, investor calls</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Formal, strategic, boardroom-appropriate</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #55system; padding: 6px;">tech</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Tech specs, architecture docs, engineering meetings</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Technical, precise, domain-specific</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">startup</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Pitch decks, investor pitches, startup content</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Energetic, visionary, pitch-ready</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #555; padding: 6px;">ai</td>
+                        <td style="border: 1px solid #555; padding: 6px;">ML papers, research proposals, technical marketing</td>
+                        <td style="border: 1px solid #555; padding: 6px;">Technical, research-oriented, precise</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <footer>
+        BusinessSpew v2.0 | Built with ❤️  in memory of Wilson A. Rogers |
+        <a href="https://fly.io" style="color: #3498db;">Deployed on Fly.io</a> |
+        <a href="https://digitalocean.com" style="color: #ff6b19;">Powered by DigitalOcean</a>
+    </footer>
+</body>
+</html>
+

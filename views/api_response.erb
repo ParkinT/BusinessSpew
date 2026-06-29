@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BusinessSpew Response - <%= @response[:result][:title] %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>BusinessSpew Response</h1>
+        <p><small>ID: <%= SecureRandom.uuid %> | Timestamp: <%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %></small></p>
+    </header>
+    
+    <div class="container">
+        <h2><%= @response[:result][:title] %></h2>
+        
+        <% @response[:result][:paragraphs].each_with_index do |paragraph, idx| %>
+            <p><%= paragraph.gsub(/\n/, '<br>').html_safe %></p>
+            <% unless idx == @response[:result][:paragraphs].size - 1 %>
+                <hr style="border-color: #555; margin: 20px 0;">
+            <% end %>
+        <% end %>
+        
+        <div class="metadata">
+            <h4>Response Metadata</h4>
+            <ul>
+                <li><strong>Sentences generated:</strong> <%= @response[:result][:paragraphs].flatten.size %></li>
+                <li><strong>Words used:</strong> <%= @response[:result][:paragraphs].split.count %></li>
+                <li><strong>Category:</strong> <%= @response[:request][:category] %></li>
+                <li><strong>Processing time:</strong> <%= (@end_time - @start_time).round(3) %> seconds</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        BusinessSpew v2.0 | <a href="/api">Back to API Docs</a>
+    </footer>
+</body>
+</html>
+
