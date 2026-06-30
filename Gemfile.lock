@@ -1,157 +1,156 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.1.6)
-      actionpack (= 4.1.6)
-      actionview (= 4.1.6)
-      mail (~> 2.5, >= 2.5.4)
-    actionpack (4.1.6)
-      actionview (= 4.1.6)
-      activesupport (= 4.1.6)
-      rack (~> 1.5.2)
-      rack-test (~> 0.6.2)
-    actionview (4.1.6)
-      activesupport (= 4.1.6)
-      builder (~> 3.1)
-      erubis (~> 2.7.0)
-    activemodel (4.1.6)
-      activesupport (= 4.1.6)
-      builder (~> 3.1)
-    activerecord (4.1.6)
-      activemodel (= 4.1.6)
-      activesupport (= 4.1.6)
-      arel (~> 5.0.0)
-    activesupport (4.1.6)
-      i18n (~> 0.6, >= 0.6.9)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
-      thread_safe (~> 0.1)
-      tzinfo (~> 1.1)
-    arel (5.0.1.20140414130214)
-    autoprefixer-rails (5.1.7)
-      execjs
-      json
-    bcrypt (3.1.10)
-    bootstrap-sass (3.3.3)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
-    builder (3.2.2)
-    capybara (2.4.4)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    coffee-rails (4.0.1)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.9.1)
-    diff-lcs (1.2.5)
-    erubis (2.7.0)
-    execjs (2.3.0)
-    factory_girl (4.5.0)
-      activesupport (>= 3.0.0)
-    hike (1.2.3)
-    i18n (0.7.0)
-    jbuilder (2.2.7)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
-    jquery-rails (3.1.2)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
-    json (1.8.2)
-    mail (2.6.3)
-      mime-types (>= 1.16, < 3)
-    mime-types (2.4.3)
-    mini_portile (0.6.2)
-    minitest (5.5.1)
-    multi_json (1.10.1)
-    nokogiri (1.6.6.2)
-      mini_portile (~> 0.6.0)
-    pg (0.18.1)
-    rack (1.5.2)
-    rack-test (0.6.3)
-      rack (>= 1.0)
-    rails (4.1.6)
-      actionmailer (= 4.1.6)
-      actionpack (= 4.1.6)
-      actionview (= 4.1.6)
-      activemodel (= 4.1.6)
-      activerecord (= 4.1.6)
-      activesupport (= 4.1.6)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.6)
-      sprockets-rails (~> 2.0)
-    railties (4.1.6)
-      actionpack (= 4.1.6)
-      activesupport (= 4.1.6)
-      rake (>= 0.8.7)
-      thor (>= 0.18.1, < 2.0)
-    rake (10.4.2)
-    rdoc (4.2.0)
-      json (~> 1.4)
-    rspec-core (3.2.0)
-      rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-rails (3.2.0)
-      actionpack (>= 3.0, <= 4.2)
-      activesupport (>= 3.0, <= 4.2)
-      railties (>= 3.0, <= 4.2)
-      rspec-core (~> 3.2.0)
-      rspec-expectations (~> 3.2.0)
-      rspec-mocks (~> 3.2.0)
-      rspec-support (~> 3.2.0)
-    rspec-support (3.2.1)
-    sass (3.4.12)
-    sdoc (0.4.1)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
-    spring (1.3.2)
-    sprockets (2.12.3)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
-      rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.4)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      sprockets (>= 2.8, < 4.0)
-    thor (0.19.1)
-    thread_safe (0.3.4)
-    tilt (1.4.1)
-    turbolinks (2.5.3)
-      coffee-rails
-    tzinfo (1.2.2)
-      thread_safe (~> 0.1)
-    uglifier (2.7.0)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
+    aws-eventstream (1.4.0)
+    aws-partitions (1.1262.0)
+    aws-sdk-core (3.252.0)
+      aws-eventstream (~> 1, >= 1.3.0)
+      aws-partitions (~> 1, >= 1.992.0)
+      aws-sigv4 (~> 1.9)
+      base64
+      bigdecimal
+      jmespath (~> 1, >= 1.6.1)
+      logger
+    aws-sdk-kms (1.129.0)
+      aws-sdk-core (~> 3, >= 3.248.0)
+      aws-sigv4 (~> 1.5)
+    aws-sdk-s3 (1.86.2)
+      aws-sdk-core (~> 3, >= 3.109.0)
+      aws-sdk-kms (~> 1.26)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.12.1)
+      aws-eventstream (~> 1, >= 1.0.2)
+    base64 (0.3.0)
+    bigdecimal (4.1.2)
+    daemons (1.4.1)
+    dotenv (3.2.0)
+    eventmachine (1.2.7)
+    hirb (0.7.3)
+    jmespath (1.6.2)
+    logger (1.7.0)
+    multi_json (1.21.1)
+    mustermann (2.0.2)
+      ruby2_keywords (~> 0.0.1)
+    nokogiri (1.19.4-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.19.4-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.19.4-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.19.4-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.19.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.19.4-x86_64-linux-musl)
+      racc (~> 1.4)
+    oj (3.17.3)
+      bigdecimal (>= 3.0)
+      ostruct (>= 0.2)
+    ostruct (0.6.3)
+    pg (1.6.3)
+    pg (1.6.3-aarch64-linux)
+    pg (1.6.3-aarch64-linux-musl)
+    pg (1.6.3-arm64-darwin)
+    pg (1.6.3-x86_64-darwin)
+    pg (1.6.3-x86_64-linux)
+    pg (1.6.3-x86_64-linux-musl)
+    racc (1.8.1)
+    rack (2.2.23)
+    rack-protection (2.2.4)
+      rack
+    ruby2_keywords (0.0.5)
+    sinatra (2.2.4)
+      mustermann (~> 2.0)
+      rack (~> 2.2)
+      rack-protection (= 2.2.4)
+      tilt (~> 2.0)
+    sinatra-contrib (2.2.4)
+      multi_json
+      mustermann (~> 2.0)
+      rack-protection (= 2.2.4)
+      sinatra (= 2.2.4)
+      tilt (~> 2.0)
+    sinatra-reloader (1.0)
+      sinatra-contrib
+    thin (2.0.1)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      logger
+      rack (>= 1, < 4)
+    tilt (2.7.0)
 
 PLATFORMS
-  ruby
+  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
-  bootstrap-sass (~> 3.3.3)
-  capybara
-  coffee-rails (~> 4.0.0)
-  factory_girl
-  jbuilder (~> 2.0)
-  jquery-rails
+  aws-sdk-s3 (~> 1.86.0)
+  dotenv
+  hirb
+  nokogiri (~> 1.19)
+  oj
   pg
-  rails (= 4.1.6)
-  rspec-rails
-  sdoc (~> 0.4.0)
-  spring
-  turbolinks
-  uglifier (>= 1.3.0)
+  rack
+  sinatra (~> 2.0)
+  sinatra-reloader
+  thin
+
+CHECKSUMS
+  aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
+  aws-partitions (1.1262.0) sha256=77e9b1dd3e8f616673f2959d2fc4e762065f83a43140e2cb82274525afbaccf7
+  aws-sdk-core (3.252.0) sha256=09c042cbfc2acf2239441cc9b982ebab2a999bed2ef6bdc51849e7b3d6e48a1c
+  aws-sdk-kms (1.129.0) sha256=363f548df321f4a4fcfd05523384e591060b400f8e65133ed7ef0793155a3343
+  aws-sdk-s3 (1.86.2) sha256=98552e85902f59f1d4334fb7f0555790ad445a6ed94ef4d1b4696b6e7f8ee043
+  aws-sigv4 (1.12.1) sha256=6973ff95cb0fd0dc58ba26e90e9510a2219525d07620c8babeb70ef831826c00
+  base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
+  bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
+  bundler (4.0.15) sha256=a4ceb882fe94a0e0ac63cd0813932bbfd631a14e5ac0b7975189b19a4d28d9e7
+  daemons (1.4.1) sha256=8fc76d76faec669feb5e455d72f35bd4c46dc6735e28c420afb822fac1fa9a1d
+  dotenv (3.2.0) sha256=e375b83121ea7ca4ce20f214740076129ab8514cd81378161f11c03853fe619d
+  eventmachine (1.2.7) sha256=994016e42aa041477ba9cff45cbe50de2047f25dd418eba003e84f0d16560972
+  hirb (0.7.3) sha256=5132733ca44b1f41f36c624693a3201284368a349dfe37f543ae6e2ad880ec57
+  jmespath (1.6.2) sha256=238d774a58723d6c090494c8879b5e9918c19485f7e840f2c1c7532cf84ebcb1
+  logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
+  multi_json (1.21.1) sha256=e6126a31808e3b4d19f483c775ceac34df190dffa62adfb63a165ee14ba68080
+  mustermann (2.0.2) sha256=cbe651b6c039e4cefa635b8087398ff59d74f83591064926cc62d37ac4c7e054
+  nokogiri (1.19.4-aarch64-linux-gnu) sha256=1269fb644a6de405057a53dd5c762b1209b43ca7424f839454d3dbc677c31a8f
+  nokogiri (1.19.4-aarch64-linux-musl) sha256=35c65b9ce72b3bb03207bdbe7067915019dc18c1b9b59139684bd6690fdd01af
+  nokogiri (1.19.4-arm-linux-gnu) sha256=a301313e38bb065d68239e79734bcd6f56fb6efaacebde29e9abf2a4735340ca
+  nokogiri (1.19.4-arm-linux-musl) sha256=588923c101bcfa78869734d247d25b598674323e7f22474fc468f6e5647311eb
+  nokogiri (1.19.4-arm64-darwin) sha256=a46db9853286e6597b36ebc6953817d15acf3a299583eb3f89fdc6f91dd63527
+  nokogiri (1.19.4-x86_64-darwin) sha256=7fd17057d3e1f00e9954a74b3cd76595d3d4a5ef233b7ed9599047c204f70551
+  nokogiri (1.19.4-x86_64-linux-gnu) sha256=379fae440b28915e3f19d752ce2dcf8465ed2b2fbefd2a7ca0dd497bc981a06a
+  nokogiri (1.19.4-x86_64-linux-musl) sha256=17dfb7c1fa194ae02fbf7c51a7afc8d278045ab3fdacfd86f91d02d7b274470b
+  oj (3.17.3) sha256=ebe3967b0bb7ac4f206561d0d9ac8875b9973f778600d7b61b5c355662a707ed
+  ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
+  pg (1.6.3) sha256=1388d0563e13d2758c1089e35e973a3249e955c659592d10e5b77c468f628a99
+  pg (1.6.3-aarch64-linux) sha256=0698ad563e02383c27510b76bf7d4cd2de19cd1d16a5013f375dd473e4be72ea
+  pg (1.6.3-aarch64-linux-musl) sha256=06a75f4ea04b05140146f2a10550b8e0d9f006a79cdaf8b5b130cde40e3ecc2c
+  pg (1.6.3-arm64-darwin) sha256=7240330b572e6355d7c75a7de535edb5dfcbd6295d9c7777df4d9dddfb8c0e5f
+  pg (1.6.3-x86_64-darwin) sha256=ee2e04a17c0627225054ffeb43e31a95be9d7e93abda2737ea3ce4a62f2729d6
+  pg (1.6.3-x86_64-linux) sha256=5d9e188c8f7a0295d162b7b88a768d8452a899977d44f3274d1946d67920ae8d
+  pg (1.6.3-x86_64-linux-musl) sha256=9c9c90d98c72f78eb04c0f55e9618fe55d1512128e411035fe229ff427864009
+  racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
+  rack (2.2.23) sha256=a8fe9d7e07064770b8ec123663fded8a59ef7e2b6db5cda7173d45a5718ab69c
+  rack-protection (2.2.4) sha256=82663dceaacffadd31a2936fdead448b8fd8e324891d52c38b2482faa2ced1b4
+  ruby2_keywords (0.0.5) sha256=ffd13740c573b7301cf7a2e61fc857b2a8e3d3aff32545d6f8300d8bae10e3ef
+  sinatra (2.2.4) sha256=3e31e9f7ffc89ce3fdd7770c9a4183150d76b6bdcc7322cf38f84303d3016c72
+  sinatra-contrib (2.2.4) sha256=63ccce08483012e0a966dd7bc63211e108bf14be74af488feae3f6ffc70ccc68
+  sinatra-reloader (1.0) sha256=d8d2ec43679b8ef48fd88c9e26ca0cc6c27fed6b988117d6be5047b651aad625
+  thin (2.0.1) sha256=5bbde5648377f5c3864b5da7cd89a23b5c2d8d8bb9435719f6db49644bcdade9
+  tilt (2.7.0) sha256=0d5b9ba69f6a36490c64b0eee9f6e9aad517e20dcc848800a06eb116f08c6ab3
+
+BUNDLED WITH
+  4.0.15

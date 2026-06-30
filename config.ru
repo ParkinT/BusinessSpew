@@ -1,4 +1,8 @@
-# This file is used by Rack-based servers to start the application.
+require 'bundler/setup'
+Bundler.require(:default)
 
-require ::File.expand_path('../config/environment',  __FILE__)
-run Rails.application
+Object.send(:remove_const, :ActiveRecord) rescue nil
+
+require_relative 'app'
+
+run BusinessSpew::App
