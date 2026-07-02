@@ -1,6 +1,10 @@
 require 'sinatra/base'
+require 'erb'
 require 'json'
 require_relative 'lib/spew_generator'
+require 'logger'
+
+set :logger, Logger.new(STDOUT)
 
 module BusinessSpew
   class App < Sinatra::Base
@@ -43,7 +47,17 @@ module BusinessSpew
     end
 
     get '/' do
-      "Business Spew API - Ready!"
+      logger.info "Business Spew API - Ready!"
+	  data = SpewGenerator.spew(
+	    paragraph_count: 2,
+	    sentence_count:  3
+	  )
+	  @title    = SpewGenerator.default_title
+	  @topic    = SpewGenerator.categories.sample
+	  @byline   = Time.now.strftime("%B %d, %Y")
+	  @paragraphs = data
+
+      erb :index
     end
 
     get '/api' do
