@@ -46,7 +46,11 @@ module BusinessSpew
       end
     end
 
-    get '/' do
+	get '/' do
+	  erb :landing, layout: false
+	end
+
+    get '/spew' do
       logger.info "Business Spew API - Ready!"
 	  data = SpewGenerator.spew(
 	    paragraph_count: 2,
@@ -69,6 +73,10 @@ module BusinessSpew
         categories: SpewGenerator.vocabulary_loaded? ? SpewGenerator.categories : [],
         services: ['/spew', '/api']
       }.to_json
+    end
+
+    get '/api-docs' do
+        erb :'api_docs', layout: false 
     end
 
     post '/spew' do
@@ -143,6 +151,29 @@ module BusinessSpew
         status 503
         { status: 'degraded', reason: 'vocabulary not loaded' }.to_json
       end
+    end
+
+    get '/favicon.ico' do
+      content_type 'image/svg+xml'
+      headers 'Cache-Control' => 'public, max-age=86400'
+      <<~SVG
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+          <text y="28" font-size="28">🔥</text>
+        </svg>
+      SVG
+    end
+ 
+    get '/robots.txt' do
+      content_type 'text/plain'
+      headers 'Cache-Control' => 'public, max-age=86400'
+      <<~ROBOTS
+        User-agent: *
+        Allow: /
+        Disallow: /admin/
+        Disallow: /health
+ 
+        Sitemap: https://leveragedsynergies.com/sitemap.xml
+      ROBOTS
     end
 
     # ------------------------------------------------------------------

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+  <meta charset="UTF-8">
+  <title>BusinessSpew — API Reference</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      min-height: 100vh;
+      color: #ecf0f1;
+      padding: 0 0 60px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+    }
+
+    header h1 { font-size: 2em; }
+    header p  { margin-top: 8px; color: rgba(255,255,255,0.7); font-size: 0.95em; }
+    header a  { color: #00ffcc; text-decoration: none; font-size: 0.9em; }
+    header a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Base URL badge ───────────────────────────── */
+    .base-url {
+      background: rgba(0,0,0,0.4);
+      border-left: 4px solid #00ffcc;
+      padding: 14px 20px;
+      border-radius: 0 6px 6px 0;
+      font-family: monospace;
+      font-size: 1em;
+      margin-bottom: 40px;
+      color: #00ffcc;
+    }
+    .base-url span { color: rgba(255,255,255,0.5); font-size: 0.85em; font-family: sans-serif; display: block; margin-bottom: 4px; }
+
+    /* ── Endpoint cards ───────────────────────────── */
+    .endpoint {
+      background: rgba(44, 62, 80, 0.85);
+      border-radius: 8px;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .endpoint-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .method {
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.8em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      min-width: 52px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .method.get  { background: #27ae60; color: #fff; }
+    .method.post { background: #e67e22; color: #fff; }
+
+    .path {
+      font-family: monospace;
+      font-size: 1em;
+      color: #00ffcc;
+      flex: 1;
+    }
+
+    .summary {
+      font-size: 0.88em;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .endpoint-body {
+      padding: 18px 20px;
+    }
+
+    .endpoint-body p {
+      font-size: 0.93em;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* ── Params table ─────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88em;
+      margin-bottom: 16px;
+    }
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.25);
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 0.8em;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: top;
+    }
+    td:first-child { font-family: monospace; color: #00ffcc; white-space: nowrap; }
+    td.optional    { color: rgba(255,255,255,0.4); font-size: 0.85em; }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── Example blocks ───────────────────────────── */
+    .label {
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+
+    pre {
+      background: rgba(0,0,0,0.5);
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85em;
+      color: #00ffcc;
+      overflow-x: auto;
+      margin-bottom: 14px;
+      white-space: pre;
+    }
+
+    /* ── Section headings ─────────────────────────── */
+    h2 {
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      margin: 36px 0 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85em;
+      margin-top: 60px;
+    }
+    footer a { color: #3498db; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BusinessSpew 🔥 — API Reference</h1>
+  <p>All endpoints return JSON. No authentication required.</p>
+  <p style="margin-top:12px"><a href="/">← Back to home</a></p>
+</header>
+
+<div class="container">
+
+  <div class="base-url">
+    <span>Base URL</span>
+    https://api.leveragedsynergies.com
+  </div>
+
+  <!-- ── STATUS ──────────────────────────────────── -->
+  <h2>Status &amp; Discovery</h2>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method get">GET</span>
+      <span class="path">/api</span>
+      <span class="summary">Service status and available topics</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Returns the service name, version, operational status, loaded vocabulary topics, and available route list. Useful for checking whether the vocabulary loaded successfully from S3.</p>
+      <div class="label">Example response</div>
+      <pre>{
+  "name": "Business Spew",
+  "version": "1.0.0",
+  "status": "running",
+  "categories": ["tech"],
+  "services": ["/spew", "/api"]
+}</pre>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method get">GET</span>
+      <span class="path">/health</span>
+      <span class="summary">Liveness check</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Lightweight health check for load balancers and uptime monitors. Returns <code>200 ok</code> when vocabulary is loaded, <code>503 degraded</code> if S3 vocabulary is unavailable.</p>
+      <div class="label">Example response (healthy)</div>
+      <pre>{ "status": "ok" }</pre>
+      <div class="label">Example response (degraded)</div>
+      <pre>{ "status": "degraded", "reason": "vocabulary not loaded" }</pre>
+    </div>
+  </div>
+
+  <!-- ── GENERATION ──────────────────────────────── -->
+  <h2>Generation</h2>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method get">GET</span>
+      <span class="path">/api/:topic/:sentences?/:paragraphs?/:title?</span>
+      <span class="summary">Generate spew for a specific topic</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Generates corporate jargon sentences scoped to the named vocabulary topic. All parameters after <code>:topic</code> are optional and positional.</p>
+      <table>
+        <tr><th>Segment</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td>:topic</td><td>String</td><td>—</td><td>Vocabulary category (e.g. <code>tech</code>). Returns 404 with available topics if not found.</td></tr>
+        <tr><td>:sentences</td><td>Integer</td><td class="optional">3</td><td>Sentences per paragraph.</td></tr>
+        <tr><td>:paragraphs</td><td>Integer</td><td class="optional">1</td><td>Number of paragraphs to generate.</td></tr>
+        <tr><td>:title</td><td>String</td><td class="optional">generated</td><td>Document title. Auto-generated from topic vocabulary if omitted.</td></tr>
+      </table>
+      <div class="label">Examples</div>
+      <pre>GET /api/tech
+GET /api/tech/2
+GET /api/tech/2/4
+GET /api/tech/2/4/My%20Title</pre>
+      <div class="label">Example response</div>
+      <pre>{
+  "title": "Stakeholder Maps Initiative",
+  "topic": "tech",
+  "paragraphs": [
+    "We will endeavor to leverage synergy playbooks. ..."
+  ]
+}</pre>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method get">GET</span>
+      <span class="path">/api/:sentences?/:paragraphs?/:title?</span>
+      <span class="summary">Generate spew from a random topic</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Identical to the topic route above but selects a vocabulary topic at random. All segments are optional.</p>
+      <div class="label">Examples</div>
+      <pre>GET /api
+GET /api/3
+GET /api/3/2</pre>
+    </div>
+  </div>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method post">POST</span>
+      <span class="path">/spew</span>
+      <span class="summary">Generate spew via JSON body</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Accepts a JSON body. All fields are optional — omit any to use the default.</p>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td>sentences</td><td>Integer</td><td class="optional">3</td><td>Sentences per paragraph.</td></tr>
+        <tr><td>paragraphs</td><td>Integer</td><td class="optional">1</td><td>Number of paragraphs.</td></tr>
+        <tr><td>category</td><td>String</td><td class="optional">random</td><td>Vocabulary topic. Falls back to random if omitted or unrecognised.</td></tr>
+      </table>
+      <div class="label">Example request</div>
+      <pre>POST /spew
+Content-Type: application/json
+
+{ "sentences": 2, "paragraphs": 3, "category": "tech" }</pre>
+      <div class="label">Example response</div>
+      <pre>{
+  "paragraphs": [
+    "We must seize the moment and optimize ROIs. ...",
+    "Take the customer's temperature and then you can ...",
+    "Success is not a crap-shoot if we leverage ..."
+  ]
+}</pre>
+    </div>
+  </div>
+
+  <!-- ── ADMIN ───────────────────────────────────── -->
+  <h2>Admin</h2>
+
+  <div class="endpoint">
+    <div class="endpoint-header">
+      <span class="method post">POST</span>
+      <span class="path">/admin/reload</span>
+      <span class="summary">Reload vocabulary from S3</span>
+    </div>
+    <div class="endpoint-body">
+      <p>Forces a re-fetch of all vocabulary JSON files from S3 without restarting the process. Returns the refreshed category list on success. ⚠️ Authentication not yet enforced — do not expose publicly.</p>
+      <div class="label">Example response (success)</div>
+      <pre>{ "status": "ok", "categories": ["tech"] }</pre>
+      <div class="label">Example response (S3 unreachable)</div>
+      <pre>{ "status": "error", "reason": "S3 Error: ..." }</pre>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<footer>
+  BusinessSpew v2.0 | Built with ❤️ in memory of Wilson A. Rogers |
+  <a href="https://fly.io">Deployed on Fly.io</a>
+</footer>
+
+</body>
+</html>
