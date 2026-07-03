@@ -47,7 +47,12 @@ module BusinessSpew
     end
 
 	get '/' do
-	  erb :landing, layout: false
+	  if request.host.start_with?('bs.')
+	    @categories = SpewGenerator.vocabulary_loaded? ? SpewGenerator.categories : []
+	    erb :playground, layout: false
+	  else
+	    erb :landing, layout: false
+	  end
 	end
 
     get '/spew' do
@@ -79,19 +84,34 @@ module BusinessSpew
         erb :'api_docs', layout: false 
     end
 
-    post '/spew' do
-      content_type :json
-      body = request.body.read
-      params_in = body.empty? ? {} : JSON.parse(body)
+	get '/playground' do
+	  @categories = SpewGenerator.vocabulary_loaded? ? SpewGenerator.categories : []
+	  erb :playground, layout: false
+	end
 
-      result = SpewGenerator.spew(
-        paragraph_count: (params_in['paragraphs'] || 1).to_i,
-        sentence_count:  (params_in['sentences']  || 3).to_i,
-        category:        params_in['category']
-      )
+	post '/spew' do
+	  content_type :json
+	  body = request.body.read
+	  params_in = body.empty? ? {} : JSON.parse(body)
 
-      { paragraphs: result }.to_json
-    end
+	  category = params_in['topic'] || params_in['category']
+
+	  result = SpewGenerator.spew(
+	    paragraph_count: (params_in['paragraphs'] || 1).to_i,
+	    sentence_count:  (params_in['sentences']  || 3).to_i,
+	    category:        category
+	  )
+
+	  title = params_in['title'].to_s.strip.empty? \
+	    ? SpewGenerator.default_title(category: category) \
+	    : params_in['title']
+
+	  {
+	    title:      title,
+	    topic:      category || SpewGenerator.categories.sample,
+	    paragraphs: result
+	  }.to_json
+	end
 
     # GET /api/:topic[/sentences[/paragraphs[/title]]]
     # Uses a splat instead of chained optional params (e.g. :sentences?)

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Spew — Playground</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(150deg, #1a1a2e 0%, #2c3e50 60%, #1a3a4a 100%);
+      min-height: 100vh;
+      color: #ecf0f1;
+      padding: 0 0 60px;
+    }
+
+    header {
+      text-align: center;
+      padding: 32px 16px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+
+    header h1 { font-size: 1.8em; font-weight: 300; letter-spacing: 0.04em; }
+    header p  { margin-top: 6px; font-size: 0.88em; color: rgba(255,255,255,0.4); }
+    header a  { color: #00ffcc; text-decoration: none; font-size: 0.85em; }
+    header a:hover { text-decoration: underline; }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ── Cards ──────────────────────────────────── */
+    .card {
+      background: rgba(44, 62, 80, 0.85);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── Form fields ────────────────────────────── */
+    .field { margin-bottom: 16px; }
+    .field:last-of-type { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 0.82em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: #ecf0f1;
+      font-size: 1em;
+      font-family: inherit;
+      min-height: 44px;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]::placeholder { color: rgba(255,255,255,0.25); }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option { background: #2c3e50; color: #ecf0f1; }
+
+    input[type="text"]:focus,
+    select:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 0 2px rgba(0,255,204,0.15);
+    }
+
+    /* ── Numeric row ────────────────────────────── */
+    .numeric-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .numeric-row .field { flex: 1; margin-bottom: 0; }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px 10px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: #ecf0f1;
+      font-size: 1em;
+      font-family: inherit;
+      min-height: 44px;
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    input[type="number"]::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* ── Validation ─────────────────────────────── */
+    .field.invalid label { color: #e74c3c; }
+    .field.invalid input,
+    .field.invalid select {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 2px rgba(231,76,60,0.15);
+    }
+
+    .field-hint {
+      font-size: 0.76em;
+      color: #e74c3c;
+      margin-top: 5px;
+      display: none;
+    }
+    .field.invalid .field-hint { display: block; }
+
+    /* ── Generate button ────────────────────────── */
+    .btn-generate {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      min-height: 48px;
+      transition: background 0.2s, opacity 0.2s;
+    }
+
+    .btn-generate:hover:not(:disabled) { background: #2980b9; }
+    .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── Output card ────────────────────────────── */
+    .output-card { display: none; }
+    .output-card.visible { display: block; }
+
+    .output-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .output-meta { flex: 1; min-width: 0; }
+
+    .output-title {
+      font-size: 1.05em;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 3px;
+      word-break: break-word;
+    }
+
+    .output-byline {
+      font-size: 0.8em;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+    }
+
+    .btn-copy {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: transparent;
+      border: 1px solid rgba(0,255,204,0.4);
+      border-radius: 6px;
+      color: #00ffcc;
+      font-size: 0.82em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+      min-height: 36px;
+    }
+
+    .btn-copy:hover { background: rgba(0,255,204,0.08); }
+    .btn-copy.copied { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); }
+
+    .output-body {
+      font-size: 0.95em;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .output-body p { margin-bottom: 1em; }
+    .output-body p:last-child { margin-bottom: 0; }
+
+    /* ── Error state ────────────────────────────── */
+    .output-error {
+      color: #e74c3c;
+      font-size: 0.9em;
+      padding: 12px;
+      background: rgba(231,76,60,0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(231,76,60,0.25);
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8em;
+      margin-top: 40px;
+    }
+    footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.6); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Business Spew &#x1F525;</h1>
+  <p>
+    Corporate nonsense, on demand.
+    &nbsp;&middot;&nbsp;
+    <a href="/api-docs">API reference</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://leveragedsynergies.com">About</a>
+  </p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <p class="card-title">Configure</p>
+
+    <div class="field" id="field-title">
+      <label for="f-title">Title</label>
+      <input type="text" id="f-title"
+             placeholder="Leave blank for a generated title"
+             maxlength="120">
+    </div>
+
+    <div class="field" id="field-topic">
+      <label for="f-topic">Topic</label>
+      <select id="f-topic">
+        <option value="">— choose a topic on which to spew —</option>
+        <% @categories.each do |cat| %>
+          <option value="<%= cat %>"><%= cat.capitalize %></option>
+        <% end %>
+        <option value="">&#8212; or &#8212;</option>
+        <option value="random">Random</option>
+      </select>
+      <span class="field-hint">Please choose a topic.</span>
+    </div>
+
+    <div class="numeric-row">
+      <div class="field" id="field-sentences">
+        <label for="f-sentences">Sentences per paragraph</label>
+        <input type="number" id="f-sentences"
+               placeholder="3" min="1" max="10" inputmode="numeric">
+      </div>
+      <div class="field" id="field-paragraphs">
+        <label for="f-paragraphs">Paragraphs</label>
+        <input type="number" id="f-paragraphs"
+               placeholder="1" min="1" max="10" inputmode="numeric">
+      </div>
+    </div>
+
+    <button class="btn-generate" id="btn-generate">Generate BS</button>
+  </div>
+
+  <div class="card output-card" id="output-card">
+    <div class="output-header">
+      <div class="output-meta">
+        <p class="output-title" id="output-title"></p>
+        <p class="output-byline" id="output-byline"></p>
+      </div>
+      <button class="btn-copy" id="btn-copy" aria-label="Copy to clipboard">
+        &#x2398; Copy
+      </button>
+    </div>
+    <div class="output-body" id="output-body"></div>
+  </div>
+
+</div>
+
+<footer>
+  <p>In memory of Wilson A. Rogers &nbsp;|&nbsp;
+    <a href="https://leveragedsynergies.com">Leveraged Synergies</a>
+  </p>
+</footer>
+
+<script>
+  const btn     = document.getElementById('btn-generate');
+  const fTitle  = document.getElementById('f-title');
+  const fTopic  = document.getElementById('f-topic');
+  const fSent   = document.getElementById('f-sentences');
+  const fPara   = document.getElementById('f-paragraphs');
+  const outCard = document.getElementById('output-card');
+  const outTitle= document.getElementById('output-title');
+  const outLine = document.getElementById('output-byline');
+  const outBody = document.getElementById('output-body');
+  const btnCopy = document.getElementById('btn-copy');
+
+  function setInvalid(fieldId, invalid) {
+    document.getElementById(fieldId).classList.toggle('invalid', invalid);
+  }
+
+  function clampNumeric(input, fallback, min, max) {
+    const raw = input.value.trim();
+    if (raw === '') return fallback;
+    const n = parseInt(raw, 10);
+    if (isNaN(n)) return fallback;
+    return Math.min(Math.max(n, min), max);
+  }
+
+  function validate() {
+    let ok = true;
+    if (!fTopic.value || fTopic.value === '') {
+      setInvalid('field-topic', true);
+      ok = false;
+    } else {
+      setInvalid('field-topic', false);
+    }
+    return ok;
+  }
+
+  fTopic.addEventListener('change', () => setInvalid('field-topic', false));
+
+  btn.addEventListener('click', async () => {
+    if (!validate()) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Generating\u2026';
+
+    const topic     = fTopic.value === 'random' ? null : fTopic.value;
+    const sentences = clampNumeric(fSent, 3, 1, 10);
+    const paragraphs= clampNumeric(fPara, 1, 1, 10);
+    const title     = fTitle.value.trim() || null;
+
+    try {
+      const resp = await fetch('/spew', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic, sentences, paragraphs, title })
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok || data.error) {
+        outBody.innerHTML = `<p class="output-error">${data.error || 'Something went wrong. Try again.'}</p>`;
+        outTitle.textContent = '';
+        outLine.textContent  = '';
+      } else {
+        outTitle.textContent = data.title || '';
+        outLine.textContent  = [
+          data.topic ? data.topic.charAt(0).toUpperCase() + data.topic.slice(1) : 'Random',
+          new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+        ].join('\u00a0\u00b7\u00a0');
+
+        outBody.innerHTML = (data.paragraphs || [])
+          .map(p => `<p>${p}</p>`)
+          .join('');
+      }
+
+      outCard.classList.add('visible');
+      outCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (err) {
+      outBody.innerHTML = `<p class="output-error">Network error. Check your connection and try again.</p>`;
+      outCard.classList.add('visible');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Generate BS';
+    }
+  });
+
+  btnCopy.addEventListener('click', () => {
+    const titleText = outTitle.textContent ? outTitle.textContent + '\n' : '';
+    const bylineText = outLine.textContent ? outLine.textContent + '\n\n' : '';
+    const bodyText  = Array.from(outBody.querySelectorAll('p'))
+      .map(p => p.textContent).join('\n\n');
+
+    navigator.clipboard.writeText(titleText + bylineText + bodyText).then(() => {
+      btnCopy.textContent = '\u2713 Copied';
+      btnCopy.classList.add('copied');
+      setTimeout(() => {
+        btnCopy.innerHTML = '&#x2398; Copy';
+        btnCopy.classList.remove('copied');
+      }, 2000);
+    });
+  });
+</script>
+
+</body>
+</html>

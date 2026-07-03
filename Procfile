@@ -1,3 +1,1 @@
-web:    bundle exec thin -R config.ru -p $PORT --socket /tmp/socket --log log/thin.log
-worker: bundle exec rake jobs:work
-
+web: bundle exec rackup config.ru --host 0.0.0.0 --port 8080
