@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Spew — API Access</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(150deg, #1a1a2e 0%, #2c3e50 60%, #1a3a4a 100%);
+      min-height: 100vh;
+      color: #ecf0f1;
+      padding: 0 0 80px;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2.2em;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    header a { color: #00ffcc; text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Section headings ─────────────────────────────── */
+    h2 {
+      font-size: 0.72em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── Cards ────────────────────────────────────────── */
+    .card {
+      background: rgba(44, 62, 80, 0.85);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Body text ────────────────────────────────────── */
+    p {
+      font-size: 0.95em;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Steps ────────────────────────────────────────── */
+    .steps {
+      counter-reset: steps;
+      list-style: none;
+    }
+
+    .steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      font-size: 0.93em;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .steps li:last-child { margin-bottom: 0; }
+
+    .steps li::before {
+      content: counter(steps);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #3498db;
+      color: #fff;
+      font-size: 0.82em;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .steps li strong { color: #fff; }
+
+    /* ── Route list ───────────────────────────────────── */
+    .route-list {
+      list-style: none;
+    }
+
+    .route-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88em;
+    }
+
+    .route-list li:last-child { border-bottom: none; }
+
+    .method {
+      font-family: monospace;
+      font-size: 0.78em;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      min-width: 46px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .method.get  { background: #27ae60; color: #fff; }
+    .method.post { background: #e67e22; color: #fff; }
+
+    .route-path {
+      font-family: monospace;
+      color: #00ffcc;
+      flex-shrink: 0;
+      min-width: 280px;
+    }
+
+    .route-desc {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.95em;
+    }
+
+    /* ── Base URL block ───────────────────────────────── */
+    .base-url {
+      background: rgba(0,0,0,0.3);
+      border-left: 3px solid #00ffcc;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 0.95em;
+      color: #00ffcc;
+      margin-bottom: 20px;
+    }
+
+    .base-url span {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.75em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CTA ──────────────────────────────────────────── */
+    .cta {
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .cta p {
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #3498db;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #2980b9; }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.82em;
+      margin-top: 60px;
+    }
+
+    footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 600px) {
+      .route-path  { min-width: unset; }
+      .route-desc  { display: none; }
+      .route-list li { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Business Spew 🔥 — API Access</h1>
+  <p>
+    <a href="https://leveragedsynergies.com">About</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://bs.leveragedsynergies.com">Playground</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://bs.leveragedsynergies.com/api-docs">Full API Docs</a>
+  </p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>About the API</h2>
+    <p>
+      The Business Spew API generates corporate jargon on demand across multiple
+      vocabulary topics. It is available to approved developers and integrators.
+      Access is controlled by API key — issued personally and revocable at any time.
+    </p>
+    <p>
+      There is no charge for access. There is no SLA. There is, however, an
+      inexhaustible supply of synergy playbooks and stakeholder maps.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>How to Request Access</h2>
+    <ol class="steps">
+      <li>
+        <strong>Contact the maintainer</strong> — reach out via
+        [<!-- TODO: add contact method, e.g. email link or form -->]
+        and briefly describe your intended use.
+      </li>
+      <li>
+        <strong>Receive your API key</strong> — keys are issued manually and
+        tied to an owner. Keep yours private; do not commit it to source control.
+      </li>
+      <li>
+        <strong>Include the key in every request</strong> — pass it as an HTTP
+        header: <code style="font-family:monospace; color:#00ffcc;">X-API-Key: your-key-here</code>
+      </li>
+      <li>
+        <strong>Start generating</strong> — point your client at the base URL
+        below and choose a route.
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Base URL</h2>
+    <div class="base-url">
+      <span>All API requests</span>
+      https://api.leveragedsynergies.com
+    </div>
+
+    <h2 style="margin-top: 20px;">Available Routes</h2>
+    <ul class="route-list">
+      <li>
+        <span class="method get">GET</span>
+        <span class="route-path">/api</span>
+        <span class="route-desc">Service status and loaded topics — no key required</span>
+      </li>
+      <li>
+        <span class="method get">GET</span>
+        <span class="route-path">/api/:topic</span>
+        <span class="route-desc">Generate spew for a named topic</span>
+      </li>
+      <li>
+        <span class="method get">GET</span>
+        <span class="route-path">/api/:topic/:sentences?/:paragraphs?/:title?</span>
+        <span class="route-desc">Generate with optional parameters</span>
+      </li>
+      <li>
+        <span class="method get">GET</span>
+        <span class="route-path">/api/:sentences?/:paragraphs?/:title?</span>
+        <span class="route-desc">Random topic, optional parameters</span>
+      </li>
+      <li>
+        <span class="method post">POST</span>
+        <span class="route-path">/spew</span>
+        <span class="route-desc">Generate via JSON request body</span>
+      </li>
+      <li>
+        <span class="method get">GET</span>
+        <span class="route-path">/health</span>
+        <span class="route-desc">Liveness check — no key required</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card cta">
+    <p>Want to explore the full parameter reference and example responses?</p>
+    <a class="btn-primary" href="https://bs.leveragedsynergies.com/api-docs">
+      View Full API Documentation &rarr;
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p>In memory of Wilson A. Rogers &nbsp;|&nbsp;
+    <a href="https://leveragedsynergies.com">Leveraged Synergies</a>
+  </p>
+</footer>
+
+</body>
+</html>

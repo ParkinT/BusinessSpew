@@ -232,6 +232,90 @@
       border: 1px solid rgba(231,76,60,0.25);
     }
 
+    /* ── Invite gate ────────────────────────────── */
+    .invite-card { text-align: center; }
+
+    .invite-card h2 {
+      font-size: 1.2em;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .invite-card p {
+      font-size: 0.88em;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .invite-card a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    .invite-input-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .invite-input-row input[type="text"] {
+      flex: 1;
+      letter-spacing: 0.08em;
+      font-family: monospace;
+      font-size: 1em;
+    }
+
+    .btn-invite {
+      padding: 0 20px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      min-height: 44px;
+      transition: background 0.2s, opacity 0.2s;
+    }
+
+    .btn-invite:hover:not(:disabled) { background: #2980b9; }
+    .btn-invite:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .invite-error {
+      margin-top: 12px;
+      font-size: 0.82em;
+      color: #e74c3c;
+      min-height: 1.2em;
+    }
+
+    .invite-free-use {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .btn-free-use {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.45);
+      border-radius: 6px;
+      padding: 9px 18px;
+      font-size: 0.82em;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-free-use:hover {
+      border-color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .configure-section { display: none; }
+    .configure-section.visible { display: block; }
+
     footer {
       text-align: center;
       color: rgba(255,255,255,0.2);
@@ -257,7 +341,35 @@
 
 <div class="container">
 
-  <div class="card">
+  <% unless @has_access %>
+  <div class="card invite-card" id="invite-card">
+    <h2>Welcome to the Playground 🔥</h2>
+    <p>
+      Access is by invitation.<br>
+      If you have an invite code, enter it below.<br>
+      Don't have one? <a href="https://leveragedsynergies.com">Visit the about page</a> to request one.
+    </p>
+    <div class="invite-input-row">
+      <input type="text" id="invite-code"
+             placeholder="Enter your invite code"
+             maxlength="13"
+             autocomplete="off"
+             autocorrect="off"
+             autocapitalize="off"
+             spellcheck="false">
+      <button class="btn-invite" id="btn-invite">Enter</button>
+    </div>
+    <div class="invite-error" id="invite-error"></div>
+    <div class="invite-free-use">
+      <p style="margin-bottom:10px; font-size:0.82em;">
+        Or try it once — no code needed.
+      </p>
+      <button class="btn-free-use" id="btn-free-use">Use my one free visit &rarr;</button>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="configure-section <%= @has_access ? 'visible' : '' %>" id="configure-section">
     <p class="card-title">Configure</p>
 
     <div class="field" id="field-title">
@@ -276,8 +388,6 @@
         <% @categories.each do |cat| %>
           <option value="<%= cat %>"><%= cat.capitalize %></option>
         <% end %>
-        <option value="">&#8212; or &#8212;</option>
-        <option value="random">Random</option>
       </select>
       <span class="field-hint">Please choose a topic.</span>
     </div>
@@ -309,9 +419,11 @@
       </button>
     </div>
     <div class="output-body" id="output-body"></div>
-  </div>
+  </div><!-- /.card (output) -->
 
-</div>
+  </div><!-- /.configure-section -->
+
+</div><!-- /.container -->
 
 <footer>
   <p>In memory of Wilson A. Rogers &nbsp;|&nbsp;
@@ -320,6 +432,82 @@
 </footer>
 
 <script>
+  // ── Invite gate ──────────────────────────────────────────────────
+  const inviteCard      = document.getElementById('invite-card');
+  const inviteCode      = document.getElementById('invite-code');
+  const btnInvite       = document.getElementById('btn-invite');
+  const inviteError     = document.getElementById('invite-error');
+  const btnFreeUse      = document.getElementById('btn-free-use');
+  const configureSection= document.getElementById('configure-section');
+
+  function revealPlayground() {
+    if (inviteCard) inviteCard.style.display = 'none';
+    configureSection.classList.add('visible');
+    configureSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  if (btnInvite) {
+    // Allow submitting with Enter key
+    inviteCode.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') btnInvite.click();
+    });
+
+    btnInvite.addEventListener('click', async () => {
+      const code = inviteCode.value.trim();
+      if (!code) {
+        inviteError.textContent = 'Please enter your invite code.';
+        return;
+      }
+
+      btnInvite.disabled = true;
+      btnInvite.textContent = 'Checking…';
+      inviteError.textContent = '';
+
+      try {
+        const resp = await fetch('/validate-invite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+
+        const data = await resp.json();
+
+        if (resp.ok) {
+          revealPlayground();
+        } else {
+          inviteError.textContent = 'That code was not recognised. Please try again or request an invitation.';
+          inviteCode.value = '';
+          inviteCode.focus();
+        }
+      } catch (err) {
+        inviteError.textContent = 'Network error. Please check your connection and try again.';
+      } finally {
+        btnInvite.disabled = false;
+        btnInvite.textContent = 'Enter';
+      }
+    });
+  }
+
+  if (btnFreeUse) {
+    btnFreeUse.addEventListener('click', async () => {
+      btnFreeUse.disabled = true;
+      btnFreeUse.textContent = 'One moment…';
+
+      try {
+        await fetch('/free-visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        // Cookie is now set server-side — reveal the generator
+        revealPlayground();
+      } catch (err) {
+        // Network error — still reveal (best-effort free visit)
+        revealPlayground();
+      }
+    });
+  }
+
+  // ── Generator ─────────────────────────────────────────────────────
   const btn     = document.getElementById('btn-generate');
   const fTitle  = document.getElementById('f-title');
   const fTopic  = document.getElementById('f-topic');
