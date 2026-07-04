@@ -270,7 +270,9 @@
     <div class="field" id="field-topic">
       <label for="f-topic">Topic</label>
       <select id="f-topic">
-        <option value="">— choose a topic on which to spew —</option>
+	<option value="random">
+	  Random (from among <%= @categories.first(3).map(&:capitalize).join(', ') %>, ...)
+	</option>
         <% @categories.each do |cat| %>
           <option value="<%= cat %>"><%= cat.capitalize %></option>
         <% end %>
