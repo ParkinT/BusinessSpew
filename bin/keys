@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# bin/keys — manage the API key allowlist stored (encrypted) in S3.
+#
+# Usage:
+#   ruby bin/keys list
+#   ruby bin/keys add <owner_name>
+#   ruby bin/keys disable <key_value>
+#   ruby bin/keys upload <local_json_file>   # one-time migration from plain JSON
+#
+$LOAD_PATH.unshift File.join(__dir__, '..', 'lib')
+require 'dotenv/load'
+require 'json'
+require 'securerandom'
+require 's3_data_store'
+
+AUTH_PATH = 'auth/api_keys.json'.freeze
+
+store  = BusinessSpew::S3DataStore.new
+cmd    = ARGV[0]
+
+def load_keys(store)
+  data = store.fetch_data(AUTH_PATH)
+  return [] if data.is_a?(Hash) && data[:error]
+  data.fetch('keys', [])
+end
+
+def save_keys(store, keys)
+  result = store.store_data(AUTH_PATH, { 'keys' => keys })
+  if result.is_a?(Hash) && result[:error]
+    abort "Upload failed: #{result[:error]}"
+  end
+end
+
+case cmd
+when 'list'
+  keys = load_keys(store)
+  if keys.empty?
+    puts 'No API keys found.'
+  else
+    printf "%-50s  %-20s  %s\n", 'Key', 'Owner', 'Enabled'
+    puts '-' * 80
+    keys.each { |k| printf "%-50s  %-20s  %s\n", k['key'], k['owner'], k['enabled'] }
+  end
+
+when 'add'
+  owner = ARGV[1]
+  abort 'Usage: ruby bin/keys add <owner_name>' if owner.nil? || owner.strip.empty?
+  keys    = load_keys(store)
+  new_key = SecureRandom.hex(24)   # 48-char hex token
+  keys << { 'key' => new_key, 'owner' => owner.strip, 'enabled' => true }
+  save_keys(store, keys)
+  puts "Key created for '#{owner.strip}':"
+  puts "  #{new_key}"
+
+when 'disable'
+  target = ARGV[1]
+  abort 'Usage: ruby bin/keys disable <key_value>' if target.nil?
+  keys  = load_keys(store)
+  entry = keys.find { |k| k['key'] == target }
+  abort 'Key not found.' if entry.nil?
+  entry['enabled'] = false
+  save_keys(store, keys)
+  puts "Disabled key for '#{entry['owner']}'."
+
+when 'upload'
+  local_path = ARGV[1]
+  abort 'Usage: ruby bin/keys upload <local_json_file>' if local_path.nil?
+  abort "File not found: #{local_path}" unless File.exist?(local_path)
+  data = JSON.parse(File.read(local_path))
+  save_keys(store, data.fetch('keys', data))
+  puts "Uploaded and encrypted → s3://#{ENV['AWS_S3_BUCKET']}/#{AUTH_PATH}"
+
+else
+  puts 'Commands:'
+  puts '  ruby bin/keys list'
+  puts '  ruby bin/keys add <owner_name>'
+  puts '  ruby bin/keys disable <key_value>'
+  puts '  ruby bin/keys upload <local_json_file>   # migrate existing plain-JSON file'
+end
