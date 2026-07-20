@@ -156,6 +156,27 @@
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
+    /* ── Auth callout ─────────────────────────────── */
+    .auth-note {
+      background: rgba(52, 152, 219, 0.12);
+      border-left: 4px solid #3498db;
+      padding: 14px 20px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9em;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      color: rgba(255,255,255,0.8);
+    }
+    .auth-note code {
+      font-family: monospace;
+      color: #00ffcc;
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .auth-note a { color: #00ffcc; text-decoration: none; }
+    .auth-note a:hover { text-decoration: underline; }
+
     footer {
       text-align: center;
       color: rgba(255,255,255,0.3);
@@ -163,13 +184,16 @@
       margin-top: 60px;
     }
     footer a { color: #3498db; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-key-note { margin-top: 12px; font-size: 0.82em; color: rgba(255,255,255,0.2); }
+    .footer-key-note a { color: rgba(255,255,255,0.35); }
   </style>
 </head>
 <body>
 
 <header>
   <h1>BusinessSpew 🔥 — API Reference</h1>
-  <p>All endpoints return JSON. No authentication required.</p>
+  <p>All endpoints return JSON. Generation endpoints require an <code style="font-family:monospace;color:#00ffcc;">X-API-Key</code> header.</p>
   <p style="margin-top:12px"><a href="/">← Back to home</a></p>
 </header>
 
@@ -178,6 +202,14 @@
   <div class="base-url">
     <span>Base URL</span>
     https://api.leveragedsynergies.com
+  </div>
+
+  <div class="auth-note">
+    <strong>Authentication</strong> &mdash; pass your API key as an HTTP header on every generation request:<br>
+    <code>X-API-Key: your-key-here</code><br><br>
+    <code>GET /api</code> and <code>GET /health</code> are public.
+    To request a key, <a href="#" data-n="webmagic" data-d="websembly" data-t="com"
+      onclick="window.location='mailto:'+this.dataset.n+'@'+this.dataset.d+'.'+this.dataset.t;return false;">contact us</a>.
   </div>
 
   <!-- ── STATUS ──────────────────────────────────── -->
@@ -237,9 +269,9 @@
       </table>
       <div class="label">Examples</div>
       <pre>GET /api/tech
-GET /api/tech/2
-GET /api/tech/2/4
-GET /api/tech/2/4/My%20Title</pre>
+X-API-Key: your-key-here</pre>
+      <pre>GET /api/tech/2/4/My%20Title
+X-API-Key: your-key-here</pre>
       <div class="label">Example response</div>
       <pre>{
   "title": "Stakeholder Maps Initiative",
@@ -260,9 +292,8 @@ GET /api/tech/2/4/My%20Title</pre>
     <div class="endpoint-body">
       <p>Identical to the topic route above but selects a vocabulary topic at random. All segments are optional.</p>
       <div class="label">Examples</div>
-      <pre>GET /api
-GET /api/3
-GET /api/3/2</pre>
+      <pre>GET /api/3/2
+X-API-Key: your-key-here</pre>
     </div>
   </div>
 
@@ -283,6 +314,7 @@ GET /api/3/2</pre>
       <div class="label">Example request</div>
       <pre>POST /spew
 Content-Type: application/json
+X-API-Key: your-key-here
 
 { "sentences": 2, "paragraphs": 3, "category": "tech" }</pre>
       <div class="label">Example response</div>
@@ -319,6 +351,11 @@ Content-Type: application/json
 <footer>
   BusinessSpew <%= app_version %> | Built with ❤️ in memory of Wilson A. Rogers |
   <a href="https://fly.io">Deployed on Fly.io</a>
+  <p class="footer-key-note">
+    API key required for generation endpoints &mdash;
+    <a href="#" data-n="webmagic" data-d="websembly" data-t="com"
+       onclick="window.location='mailto:'+this.dataset.n+'@'+this.dataset.d+'.'+this.dataset.t;return false;">request one here</a>.
+  </p>
 </footer>
 
 </body>
