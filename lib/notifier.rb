@@ -102,6 +102,61 @@ module Notifier
     )
   end
 
+  def app_started
+    send(
+      title:    '🚀 App Started',
+      message:  "BusinessSpew is live\nTime: #{timestamp}",
+      priority: :low,
+      tags:     ['rocket']
+    )
+  end
+
+  # Note: this fires on every rejected request — disable if traffic is noisy.
+  def invalid_api_key(ip:, path:)
+    send(
+      title:    '🔑 Invalid API Key',
+      message:  "Path: #{path}\nIP:   #{ip}\nTime: #{timestamp}",
+      priority: :default,
+      tags:     ['key', 'warning']
+    )
+  end
+
+  def invalid_invite_attempt(code:, reason:, ip:)
+    send(
+      title:    '🚫 Invalid Invite Attempt',
+      message:  "Code:   #{code}\nReason: #{reason}\nIP:     #{ip}\nTime:   #{timestamp}",
+      priority: :default,
+      tags:     ['no_entry', 'key']
+    )
+  end
+
+  def reload_degraded(reason:)
+    send(
+      title:    '⚠️  Reload Degraded',
+      message:  "Reason: #{reason}\nTime:   #{timestamp}",
+      priority: :high,
+      tags:     ['warning']
+    )
+  end
+
+  def api_key_added(owner:)
+    send(
+      title:    '➕ API Key Added',
+      message:  "Owner: #{owner}\nTime:  #{timestamp}",
+      priority: :default,
+      tags:     ['key', 'white_check_mark']
+    )
+  end
+
+  def api_key_disabled(owner:)
+    send(
+      title:    '🔒 API Key Disabled',
+      message:  "Owner: #{owner}\nTime:  #{timestamp}",
+      priority: :default,
+      tags:     ['key', 'lock']
+    )
+  end
+
   def notification_failed(event:, reason:)
     # Best-effort self-notification when another notification fails.
     # Uses a stripped-down request to minimise the chance of a second failure.

@@ -30,6 +30,8 @@ module BusinessSpew
         Notifier.s3_error(operation: 'AuthStore initialisation', reason: e.message)
         warn "WARNING: AuthStore failed to initialise: #{e.message}"
       end
+
+      Notifier.app_started
     end
 
     # ── Error handlers ────────────────────────────────────────────────
@@ -52,6 +54,7 @@ module BusinessSpew
       def require_api_key!
         key = request.env['HTTP_X_API_KEY']
         unless auth_store.valid_key?(key)
+          Notifier.invalid_api_key(ip: client_ip, path: request.path)
           halt 401, { 'Content-Type' => 'application/json' },
                { error:   'Unauthorised. A valid API key is required.',
                  contact: 'Visit https://leveragedsynergies.com to request access.' }.to_json
@@ -126,6 +129,7 @@ module BusinessSpew
 
       unless InviteCodeValidator.valid?(code)
         reason = InviteCodeValidator.failure_reason(code)
+        Notifier.invalid_invite_attempt(code: code, reason: reason, ip: client_ip)
         halt 403, { error: 'Invalid invite code.', reason: reason }.to_json
       end
 
@@ -315,6 +319,7 @@ module BusinessSpew
           )
           { status: 'ok', categories: SpewGenerator.categories }.to_json
         else
+          Notifier.reload_degraded(reason: 'reload ran but vocabulary still empty')
           status 503
           { status: 'degraded', reason: 'reload ran but vocabulary still empty' }.to_json
         end
