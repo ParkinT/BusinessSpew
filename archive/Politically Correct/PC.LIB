@@ -1,0 +1,272 @@
+[Header]
+copyright=(c)1998 Thom Parkin
+;this copyright line must exist intact!!
+LibraryTitle=Politically Correct
+Version=1.0b
+Application=Politically Correct - a true WORD processor
+
+[Options]
+Ignorecase=FALSE
+ConfigureColor=clBtnFace
+ConfigureLibraryColor=clBtnFace
+PCcolor=$C0C0C0
+PCFontColor=clWindowText
+ConfigureFontColor=clWindowText
+MAXWORDLENGTH=13
+MAXPHRASELENGTH=35
+
+[History]
+LastModifiedBy=ThomWare
+LastModifiedDate=9/6/98
+
+[a]
+a dance=a pre-coital rhythmic experience
+a farm=a place where both land and animals are exploited
+a fish=an icthyo-American
+a jew=a person of semitic origin
+a misktake=an issue
+a mute=a vocally challenged individiual
+a pervert=a person of sexual disfunction
+a retard=a special person
+a tax=a contribution
+a whore=a sex care provider
+
+[PhraseHeadings]
+a=1
+the=1
+tone=1
+white=1
+
+[2]
+he=s/he
+
+[3]
+ant=industrious insect american
+bug=design side effect
+bum=unaffiliated applicant for private-sector funding
+cat=feline american
+cop=peace officer
+cow=bovine american
+dog=canine american
+fag=gender challenged
+fat=horizontally gifted
+fee=contribution
+gay=alternative lifestyle
+his=her/his
+ill=not health enabled
+jap=Asian American
+jew=bargain agressively
+man=person
+off=energy-efficient
+old=chronologically gifted
+our=our collective
+PMS=cyclically challenged
+rat=rodent american
+tax=solicit a contribution
+
+[4]
+ants=industrious insect americans
+bald=folically independent
+beef=processed bovine carcass
+blow=offer positive air pressure
+book=processed tree carcass
+dead=living impaired
+deaf=aurally challenged
+dumb=verbally challenged
+fail=acheive a deficiency
+farm=exploit mother earth
+fire=outsource
+fish=rape the oceans
+flea=host dependant lifeform
+flee=vacate expediciously
+frog=Amphibian American
+geek=socially challenged individual
+girl=pre-womyn
+homo=one who enjoys an alternative lifestyle
+late=chronologically challenged
+lazy=motivationally deficient
+like=not unlike
+live=co-habitate
+meat=processed animal carcass
+mice=rodent americans
+mute=verbally challenged
+nerd=socially challenged individual
+odor=nondiscretionary fragrance
+poor=economically marginalized
+pork=processed pig carcass
+pray=mutter primitive incantations
+race=ethnic enablement
+rats=rodent americans
+sick=not health enabled
+slow=special
+slut=suffering from a sex addiction
+spic=Hispanic
+stud=suffering from a sex addiction
+suck=offer negative air pressure
+tall=person of height
+thin=horizontally challenged
+ugly=cosmetically different
+wife=life partner
+
+[5]
+alive=temporarily metabolically abled
+black=an African American
+blind=visually challenged
+bored=attentively challenged
+chink=an Asian American
+crook=ethically challenged individual
+dance=endure a pre-coital rhythmic experience
+drown=aquatically challenge
+drunk=spacially perplexed
+fleas=host dependant lifeforms
+loser=uniquely-fortuned individual on an alternative career path
+messy=differently organized
+plant=Campus
+queer=sexually disoriented
+roach=insect american
+short=Vertically challanged
+spade=person of color
+spend=negative-save
+stain=creatively re-dye
+tired=energy challeged
+white=melanin-impoverished
+whore=provide services
+woman=womyn
+women=wymin
+worst=least best
+write=provide content
+wrong=differently logical
+
+[6]
+author=content provider
+boring=charasmatically challenged
+broken=mechanically challenged
+clumsy=uniquely coordinated
+cowboy=bovine control officer
+female=person of gender
+glitch=undocumented behavior
+inmate=resident
+jewish=person of semitic being
+jungle=rainforest
+junkie=in recovery
+lawyer=legal council
+layoff=outsource
+living=temporarily metabolically abled
+prayer=primitive incantation
+racing=operating in a competitive fashion
+racist=genetically discriminating
+retard=achieve slower than expected progress
+single=romantically challenged
+skinny=skeletally prominent
+sloppy=differently organized
+spider=arachnoid american
+stoned=chemically inconvenienced
+stupid=knowledge-base nonpossessor
+talent=core competancy
+thirst=osmotic challenge
+
+[7]
+athiest=religion challenged
+chicano=person of color
+clarify=disambiguate
+cowboys=bovine control officers
+crooked=ethically challenged
+dancing=enduring a pre-coital rhythmic experience
+explain=disambiguate
+farming=exploiting mother earthhimself=coself
+fireman=fireperson
+fishing=raping the oceans
+grammar=ethnocentric white patriarchal restructuring of language
+herself=coself
+manhole=person hole
+mistake=assume incorrectly
+mistook=assumed in an incorrect fashion
+patient=client
+pervert=cause disfunction
+redneck=person of region
+roaches=insect americans
+similar=not unlike
+spender=negative saver
+stained=creatively re-dyed
+thirsty=osmotically challenged
+vagrant=nonspecifically destinationed individual
+workers=resources
+
+[8]
+chairman=chairperson
+drowning=aquatically challenged
+employee=resource
+facility=Campus
+homeless=outdoor urban dweller
+ignorant=factually unencumbered
+impotent=erectionally challenged
+japanese=Asian American
+minority=under-represented
+mistaken=assuming incorrectly
+oriental=asian american
+parasite=host dependant lifeform
+pregnant=parasitically opressed
+prisoner=client of the correctional system
+retarded=special
+roommate=co-habitant
+sunbathe=experience solar enhancement
+talented=enjoying a core competancy
+
+[9]
+boyfriend=significant other
+breakdown=intermittent issue
+caucasian=racially challenged
+criticism=hate speech
+deafening=aurally challenging
+dishonest=ethically different
+employees=resources
+heavy-set=person of mass
+heirarchy=Adminisphere
+hillbilly=rustically inclined
+manhandle=personhandle
+overwhelm=become more active
+parasitic=host dependant
+perverted=Sexually dysfunctional
+policeman=peace officer
+pregnancy=parasitically opressed condition
+
+[10]
+dishwasher=utensil sanitizer
+earthquake=geological correction
+garbageman=sanitation engineer
+girlfriend=significant other
+homosexual=one who enjoys an alternative lifestyle
+panhandler=unaffiliated applicant for private-sector funding.
+prostitute=sex care provider
+unemployed=Involuntarily leisured
+
+[11]
+incarcerate=become a client of the correctional system
+overwhelmed=more active
+spendthrift=negative saver
+
+[12]
+conservative=reactionary
+disagreement=hate speech
+
+[13]
+Establishment=White Power Elite
+spic-and-span=Hispanic American
+
+[the]
+the dance=the pre-coital rhythmic experience
+the farm=the place where both land and animals are exploited
+the fish=the icthyo-American
+the jew=the person of semitic origin
+the mistake=the issue
+the mute=the vocally challenged individiual
+the pervert=the person of sexual disfunction
+the retard=the special person
+the tax=the contribution
+the whore=the sex care provider
+
+[tone]
+tone deaf=musically delayed
+
+[white]
+white trash=Caucasian culturally-disadvantaged

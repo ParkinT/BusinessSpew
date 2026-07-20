@@ -1,0 +1,43 @@
+[Header]
+copyright=(c)1998 Thom Parkin
+;this copyright line must exist intact!!
+LibraryTitle=Customized
+Version=1.0b
+Application=Politically Correct - a true WORD processor
+
+[Options]
+Ignorecase=FALSE
+ConfigureColor=clBtnFace
+ConfigureLibraryColor=clBtnFace
+PCcolor=$C0C0C0
+PCFontColor=clWindowText
+ConfigureFontColor=clWindowText
+MAXWORDLENGTH=13
+MAXPHRASELENGTH=35
+
+[History]
+LastModifiedBy=ThomWare
+LastModifiedDate=9/6/98
+
+[2]
+he=s/he
+PC=Politically Correct
+
+[3]
+fat=horizontally gifted
+man=person
+PMS=cyclically challenged
+
+[4]
+bald=folically independent
+dead=living impaired
+fail=acheive a deficiency
+geek=socially challenged individual
+late=chronologically challenged
+lazy=motivationally deficient
+nerd=socially challenged individual
+poor=economically marginalized
+
+[5]
+worst=least best
+
